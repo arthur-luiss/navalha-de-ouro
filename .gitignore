@@ -1,0 +1,14 @@
+node_modules
+dist
+.output
+.nitro
+.vercel
+.tanstack
+*.log
+*.local
+*.tsbuildinfo
+.env
+.env.*
+.DS_Store
+.vscode/*
+.idea
