@@ -1,5 +1,5 @@
-export const WHATSAPP_NUMBER = "5511999999999";
-export const ENDERECO = "Av. Paulista, 1000 - Bela Vista, São Paulo - SP";
+export const WHATSAPP_NUMBER = "5581983755704";
+export const ENDERECO = "R. Maj. Med. Vicente Fonseca de Matos, 564 - Candeias, Jaboatão dos Guararapes - PE, 54430-000";
 
 export function whatsappLink(servico?: string) {
   const msg = servico
