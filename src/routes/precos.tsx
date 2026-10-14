@@ -1,16 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout, PageTitle } from "@/components/Layout";
 import { PRECOS, whatsappLink } from "@/lib/barbearia";
+import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/precos")({
-  head: () => ({
-    meta: [
-      { title: "Tabela de preços | Navalha de Ouro" },
-      { name: "description", content: "Preços de corte, barba, combos e mais na Navalha de Ouro Barbearia." },
-      { property: "og:title", content: "Tabela de preços | Navalha de Ouro" },
-      { property: "og:description", content: "Confira os valores e agende pelo WhatsApp." },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Tabela de preços | Navalha de Ouro",
+      description:
+        "Preços de corte, barba, combos e mais na Navalha de Ouro Barbearia. Agende pelo WhatsApp.",
+      path: "/precos",
+    }),
   component: Precos,
 });
 
@@ -23,11 +23,22 @@ function Precos() {
           {PRECOS.map((p) => (
             <li key={p.nome} className="flex flex-wrap items-center gap-4 p-5">
               <div className="flex-1">
-                <h2 className="font-display text-2xl sm:text-3xl tracking-wide">{p.nome}</h2>
+                <h2 className="font-display text-2xl sm:text-3xl tracking-wide">
+                  {p.nome}
+                </h2>
                 <p className="text-sm text-muted-foreground">{p.desc}</p>
               </div>
-              <span className="font-display text-3xl sm:text-4xl text-primary">R$ {p.preco}</span>
-              <a href={whatsappLink(p.nome)} target="_blank" rel="noopener noreferrer" className="btn-outline text-xs">Agendar</a>
+              <span className="font-display text-3xl sm:text-4xl text-primary">
+                R$ {p.preco}
+              </span>
+              <a
+                href={whatsappLink(p.nome)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline text-xs"
+              >
+                Agendar
+              </a>
             </li>
           ))}
         </ul>

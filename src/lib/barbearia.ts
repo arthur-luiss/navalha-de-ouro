@@ -1,3 +1,5 @@
+export const SITE_URL = "https://barbearia-aven-nivus.vercel.app";
+export const NOME = "Barbearia";
 export const WHATSAPP_NUMBER = "5581983755704";
 export const ENDERECO = "R. Maj. Med. Vicente Fonseca de Matos, 564 - Candeias, Jaboatão dos Guararapes - PE, 54430-000";
 

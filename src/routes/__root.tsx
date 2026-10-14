@@ -1,3 +1,4 @@
+import { seo } from "@/lib/seo";
 import {
   Outlet,
   Link,
@@ -11,12 +12,54 @@ import type { ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 
+import {
+  ENDERECO,
+  NOME,
+  PRECOS,
+  SITE_URL,
+  WHATSAPP_NUMBER,
+} from "../lib/barbearia";
+
+const precos = PRECOS.map((p) => p.preco);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BarberShop",
+  name: NOME,
+  url: SITE_URL,
+  image: `${SITE_URL}/og-image.jpg`,
+  logo: `${SITE_URL}/favicon.png`,
+  telephone: `+${WHATSAPP_NUMBER}`,
+  priceRange: `R$${Math.min(...precos)}-R$${Math.max(...precos)}`,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: ENDERECO,
+    addressCountry: "BR",
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "09:00",
+      closes: "20:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Saturday",
+      opens: "09:00",
+      closes: "18:00",
+    },
+  ],
+};
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Página não encontrada</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">
+          Página não encontrada
+        </h2>
         <p className="mt-2 text-sm text-muted-foreground">
           A página que você procura não existe ou foi movida.
         </p>
@@ -74,9 +117,25 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Navalha de Ouro Barbearia" },
-      { name: "description", content: "Barbearia com agendamento pelo WhatsApp." },
+      {
+        name: "description",
+        content: "Barbearia com agendamento pelo WhatsApp.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "theme-color", content: "#1a1714" },
+      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: NOME },
+      { property: "og:locale", content: "pt_BR" },
+      { property: "og:image", content: `${SITE_URL}/og-image.jpg` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Navalha de Ouro Barbearia" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.jpg` },
+    ],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(jsonLd) },
     ],
     links: [
       {
@@ -84,7 +143,10 @@ export const Route = createRootRoute({
         href: appCss,
       },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Bebas+Neue&family=Cinzel:wght@600;700&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Bebas+Neue&family=Cinzel:wght@600;700&display=swap",
+      },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
     ],
   }),

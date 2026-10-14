@@ -1,16 +1,16 @@
+import { seo } from "@/lib/seo";
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout, PageTitle, WhatsAppButton } from "@/components/Layout";
 import { ENDERECO } from "@/lib/barbearia";
 
 export const Route = createFileRoute("/localizacao")({
-  head: () => ({
-    meta: [
-      { title: "Localização e horários | Navalha de Ouro" },
-      { name: "description", content: "Endereço, mapa e horário de funcionamento da Navalha de Ouro Barbearia." },
-      { property: "og:title", content: "Localização | Navalha de Ouro" },
-      { property: "og:description", content: "Saiba como chegar na barbearia." },
-    ],
-  }),
+  head: () =>
+    seo({
+      title: "Localização e horários | Navalha de Ouro",
+      description:
+        "Endereço, mapa e horário de funcionamento da Navalha de Ouro Barbearia.",
+      path: "/localizacao",
+    }),
   component: Localizacao,
 });
 
@@ -37,7 +37,7 @@ function Localizacao() {
           <iframe
             title="Mapa da barbearia"
             src={`https://www.google.com/maps?q=${q}&output=embed`}
-            className="h-[450px] w-full rounded-lg border border-border"
+            className="h-450px w-full rounded-lg border border-border"
             loading="lazy"
           />
         </div>
